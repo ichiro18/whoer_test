@@ -26,6 +26,7 @@ export default {
       axios.defaults.headers = {
         "Accept-Language": this.locale
       };
+      this.$i18n.locale = this.locale;
     }
   },
   mounted() {
@@ -39,7 +40,9 @@ export default {
           );
           if (currentLang) {
             this.locale = currentLang.code;
+            this.handleSelectLang();
           }
+          console.log(this.$i18n);
         }
       })
       .catch(error => {

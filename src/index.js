@@ -1,10 +1,10 @@
 // * Global
 import Vue from "vue";
+import axios from "axios";
 import App from "@project_src/App.vue";
 import router from "@project_src/routes";
-import axios from "axios";
-import i18n from "vue-i18n";
 import store from "@project_src/store";
+import i18n from "@project_src/locale";
 // * Styles
 import "@project_src/common/styles/theme.scss";
 // * Layout
@@ -15,9 +15,6 @@ Vue.component("main-layout", MainLayout);
 
 // register api
 axios.defaults.baseURL = "https://test.whteam.net";
-
-// Register i18n
-Vue.use(i18n);
 
 // Navigate hooks
 router.beforeEach((to, from, next) => {
@@ -38,5 +35,6 @@ router.beforeEach((to, from, next) => {
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(App)
 }).$mount("#app");

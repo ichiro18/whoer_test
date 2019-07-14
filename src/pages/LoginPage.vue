@@ -1,14 +1,16 @@
 <template>
   <div class="account">
     <div class="account__title">
-      <h1 class="title__headline">Welcome back</h1>
-      <span class="title__subheadline">Log in to your account</span>
+      <h1 class="title__headline">{{ $t("title.headline") }}</h1>
+      <span class="title__subheadline">{{ $t("title.subHeadline") }}</span>
     </div>
     <div class="account__box">
       <form action="/login" class="account__form" id="login-form">
         <div id="flash"></div>
         <div class="form__item">
-          <label for="user-login" class="form__label">Login</label>
+          <label for="user-login" class="form__label">
+            {{ $t("form.loginField") }}
+          </label>
           <input
             type="text"
             id="user-login"
@@ -18,7 +20,9 @@
           />
         </div>
         <div class="form__item">
-          <label for="user-password" class="form__label">Password</label>
+          <label for="user-password" class="form__label">
+            {{ $t("form.passwordField") }}
+          </label>
           <input
             type="password"
             id="user-password"
@@ -30,7 +34,7 @@
         <input
           type="submit"
           name="commit"
-          value="Log in"
+          :value="$t('form.submit')"
           class="form__submit"
         />
       </form>
@@ -39,7 +43,33 @@
 </template>
 <script>
 export default {
-  name: "LoginPage"
+  name: "LoginPage",
+  i18n: {
+    messages: {
+      en: {
+        title: {
+          headline: "Welcome back",
+          subHeadline: "Log in to your account"
+        },
+        form: {
+          loginField: "Login",
+          passwordField: "Password",
+          submit: "Log in"
+        }
+      },
+      ru: {
+        title: {
+          headline: "С возвращением",
+          subHeadline: "Войдите в свою учетную запись"
+        },
+        form: {
+          loginField: "Имя пользователя",
+          passwordField: "Пароль",
+          submit: "Войти"
+        }
+      },
+    }
+  }
 };
 </script>
 <style lang="scss">
