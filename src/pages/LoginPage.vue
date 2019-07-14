@@ -57,6 +57,61 @@ export default {
           submit: "Log in"
         }
       },
+      es: {
+        title: {
+          headline: "Dar una buena acogida",
+          subHeadline: "Ingrese a su cuenta"
+        },
+        form: {
+          loginField: "Iniciar sesión",
+          passwordField: "Contraseña",
+          submit: "Iniciar sesión"
+        }
+      },
+      de: {
+        title: {
+          headline: "Willkommen zurück",
+          subHeadline: "Ins Konto einloggen"
+        },
+        form: {
+          loginField: "Anmeldung",
+          passwordField: "Passwort",
+          submit: "Einloggen"
+        }
+      },
+      fr: {
+        title: {
+          headline: "Nous saluons le retour",
+          subHeadline: "Connectez-vous à votre compte"
+        },
+        form: {
+          loginField: "S'identifier",
+          passwordField: "Mot de passe",
+          submit: "S'identifier"
+        }
+      },
+      "pt-br": {
+        title: {
+          headline: "Bem vindo de volta",
+          subHeadline: "Faça login na sua conta"
+        },
+        form: {
+          loginField: "Entrar",
+          passwordField: "Senha",
+          submit: "Entrar"
+        }
+      },
+      it: {
+        title: {
+          headline: "Ben tornato",
+          subHeadline: "Accedi al tuo account"
+        },
+        form: {
+          loginField: "Accesso",
+          passwordField: "Parola d'ordine",
+          submit: "Accesso"
+        }
+      },
       ru: {
         title: {
           headline: "С возвращением",
@@ -68,6 +123,50 @@ export default {
           submit: "Войти"
         }
       },
+      uk: {
+        title: {
+          headline: "З поверненням",
+          subHeadline: "Увійдіть до свого облікового запису"
+        },
+        form: {
+          loginField: "Ім'я користувача",
+          passwordField: "Пароль",
+          submit: "Увійти"
+        }
+      },
+      tr: {
+        title: {
+          headline: "Tekrar hoşgeldiniz",
+          subHeadline: "Hesabınıza giriş yapın"
+        },
+        form: {
+          loginField: "Kullanıcı adı",
+          passwordField: "Parola",
+          submit: "Oturum aç"
+        }
+      },
+      "zh-tw": {
+        title: {
+          headline: "歡迎回來",
+          subHeadline: "登錄到您的帳戶"
+        },
+        form: {
+          loginField: "用戶名",
+          passwordField: "密碼",
+          submit: "登錄"
+        }
+      },
+      "zh-cn": {
+        title: {
+          headline: "欢迎回来",
+          subHeadline: "登录到您的帐户"
+        },
+        form: {
+          loginField: "用户名",
+          passwordField: "密码",
+          submit: "登录"
+        }
+      }
     }
   }
 };

@@ -42,7 +42,6 @@ export default {
             this.locale = currentLang.code;
             this.handleSelectLang();
           }
-          console.log(this.$i18n);
         }
       })
       .catch(error => {
