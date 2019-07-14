@@ -1,13 +1,15 @@
 <template>
-  <h1>Hello {{ name }}</h1>
+  <component :is="layout" />
 </template>
 <script>
+const default_layout = "main";
+
 export default {
   name: "App",
-  data: () => {
-    return {
-      name: "test"
-    };
+  computed: {
+    layout() {
+      return (this.$route.meta.layout || default_layout) + "-layout";
+    }
   }
 };
 </script>

@@ -43,7 +43,8 @@ const devConfig = {
     contentBase: PATH.dist,
     compress: true,
     port: 8080,
-    quiet: true
+    quiet: true,
+    historyApiFallback: true
   }
 };
 
