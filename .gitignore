@@ -1,0 +1,22 @@
+# Workflow
+# =============================================================
+.idea/
+.vscode/
+.buildpath
+.project
+.settings/
+.build/
+nbproject/
+/tags
+.netbeans.xml
+.env
+# OS
+# =============================================================
+.DS_Store
+Thumbs.db
+*.log
+
+# Frontend
+# =============================================================
+node_modules/
+dist/
