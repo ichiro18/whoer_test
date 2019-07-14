@@ -1,28 +1,28 @@
 //  1. Colors
 // ------------------------------------------
-$primary-color: #4A90E2!default;
-$accent-color: white!default;
-$error-color: #b00020!default;
+$primary-color: #4a90e2 !default;
+$accent-color: white !default;
+$error-color: #b00020 !default;
 
 // Text
-$dark-primary-text-color: rgba(black, .87);
-$dark-secondary-text-color: rgba(black, .54);
-$dark-disabled-text-color: rgba(black, .38);
+$dark-primary-text-color: rgba(black, 0.87);
+$dark-secondary-text-color: rgba(black, 0.54);
+$dark-disabled-text-color: rgba(black, 0.38);
 
 $white-primary-text-color: white;
-$white-secondary-text-color: rgba(white, .7);
-$white-disabled-text-color: rgba(white, .5);
+$white-secondary-text-color: rgba(white, 0.7);
+$white-disabled-text-color: rgba(white, 0.5);
 
 // Icon
-$dark-icon-color: rgba(black, .38);
-$white-icon-color: rgba(white, .5);
+$dark-icon-color: rgba(black, 0.38);
+$white-icon-color: rgba(white, 0.5);
 
 // Background
-$background-primary-color: #F7F9FA;
+$background-primary-color: #f7f9fa;
 $background-accent-color: $primary-color;
 
 // Link
-$link-primary-color: #4A90E2;
+$link-primary-color: #4a90e2;
 $link-visited-color: #661fff;
 
 //  2. Typography

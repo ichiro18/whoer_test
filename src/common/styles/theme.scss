@@ -30,8 +30,9 @@ body {
 /* Clear */
 .clear {
   *zoom: 1;
-  &:before, &:after {
-    content: ' ';
+  &:before,
+  &:after {
+    content: " ";
     display: table;
   }
   &:after {
@@ -40,7 +41,8 @@ body {
 }
 
 /* Input */
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   outline: none;
   border: 1px solid $primary-color;
 }

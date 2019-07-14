@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "./node_modules/.bin/webpack-dev-server --config config/webpack/webpack.dev.config.js",
     "build:dev": "./node_modules/.bin/webpack --config config/webpack/webpack.dev.config.js",
-    "lint:css": "stylelint 'src/**/*.vue'"
+    "lint:js": "eslint src/**/*.(vue|js)"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
@@ -40,9 +40,12 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.9.0",
+    "axios": "^0.19.0",
     "normalize.css": "^8.0.1",
     "roboto-fontface": "^0.10.0",
     "vue": "^2.6.10",
-    "vue-router": "^3.0.7"
+    "vue-i18n": "^8.12.0",
+    "vue-router": "^3.0.7",
+    "vuex": "^3.1.1"
   }
 }

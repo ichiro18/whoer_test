@@ -2,8 +2,8 @@ import Vue from "vue";
 import Router from "vue-router";
 
 // * Pages
-import IndexPage from "./pages/IndexPage.vue";
-import LoginPage from "./pages/LoginPage.vue";
+import IndexPage from "@project_src/pages/IndexPage.vue";
+import LoginPage from "@project_src/pages/LoginPage.vue";
 
 Vue.use(Router);
 

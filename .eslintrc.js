@@ -5,4 +5,7 @@ module.exports = {
     "plugin:prettier/recommended",
     "eslint:recommended"
   ],
+  "rules": {
+    "no-console": 0,
+  }
 };
