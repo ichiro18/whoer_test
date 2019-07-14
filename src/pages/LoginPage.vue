@@ -5,8 +5,18 @@
       <span class="title__subheadline">{{ $t("title.subHeadline") }}</span>
     </div>
     <div class="account__box">
-      <form action="/login" class="account__form" id="login-form">
-        <div id="flash"></div>
+      <form
+        action="/login"
+        class="account__form"
+        id="login-form"
+        method="post"
+        @submit="checkForm"
+      >
+        <div id="flash" v-if="errors.length">
+          <ul>
+            <li v-for="error in errors" :key="error">{{ error }}</li>
+          </ul>
+        </div>
         <div class="form__item">
           <label for="user-login" class="form__label">
             {{ $t("form.loginField") }}
@@ -168,6 +178,33 @@ export default {
         }
       }
     }
+  },
+  data() {
+    return {
+      errors: [],
+      fields: {
+        username: null,
+        password: null
+      }
+    };
+  },
+  methods: {
+    checkForm(e) {
+      e.preventDefault();
+      if (this.fields.username && this.fields.password) {
+        return true;
+      }
+
+      this.errors = [];
+
+      // TODO: i18n error messages
+      if (!this.fields.username) {
+        this.errors.push(this.$t("form.loginField") + " field is required");
+      }
+      if (!this.fields.password) {
+        this.errors.push(this.$t("form.passwordField") + " field is required");
+      }
+    }
   }
 };
 </script>
@@ -212,6 +249,18 @@ export default {
       flex-direction: column;
       justify-content: center;
       padding: 40px 40px 30px;
+      #flash {
+        display: block;
+        width: 100%;
+        margin-bottom: 30px;
+        background-color: #fcf8e3;
+        border: 1px solid #faebcc;
+        border-radius: 3px;
+        color: #76674e;
+        font-size: 1rem;
+        line-height: 1.2rem;
+        padding: 8px 10px;
+      }
       .form__item {
         margin-bottom: 20px;
         position: relative;
