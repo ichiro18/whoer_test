@@ -1,4 +1,4 @@
-![Experiment](experiment.png)
+![Experiment](src/common/images/logo.png)
 # Whoer test
 > Development of the SPA from the test [task](https://test.whteam.net/task-front.txt)
 
