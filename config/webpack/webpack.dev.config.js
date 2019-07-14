@@ -13,6 +13,8 @@ const scriptLoader = require("./loaders/script.loader");
 const styleLoader = require("./loaders/style.loader");
 const imageLoader = require("./loaders/image.loader");
 const fontLoader = require("./loaders/font.loader");
+// * Workflow
+const linters = require("./workflow/linters");
 
 
 // * CONST
@@ -75,8 +77,11 @@ const devPlugins = {
 module.exports = merge(
   devConfig,
   devPlugins,
+  // Loaders
   scriptLoader.config,
   styleLoader.config,
   imageLoader.config,
   fontLoader.config,
+  // Workflow
+  linters.config,
 );
