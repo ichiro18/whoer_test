@@ -1,4 +1,4 @@
-![Experiment](experiment.png)
+![Experiment](src/common/images/logo.png)
 # Whoer test
 > Development of the SPA from the test [task](https://test.whteam.net/task-front.txt)
 
@@ -40,10 +40,10 @@ For transparency into the release cycle and in striving to maintain backward com
 For more information on SemVer, please visit http://semver.org/.
 
 ## TODO
-- [ ] VueJS SPA skeleton
+- [X] VueJS SPA skeleton
+- [ ] i18n
 - [ ] Auth
 - [ ] CRUDL
-- [ ] i18n
 
 ## Authors
 Authors
