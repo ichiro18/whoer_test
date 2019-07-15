@@ -7,32 +7,29 @@
 ![Build](https://img.shields.io/badge/build-passing-brightgreen.svg?longCache=true&style=flat-square)
 ![Tests](https://img.shields.io/badge/tests-%E2%9C%94%200%20%7C%20%E2%9C%98%200-brightgreen.svg?longCache=true&style=flat-square)
 
-* screenshot
+![Screenshot](Screenshot.png)
 
 ## Features
-Features
+- Single Page Application
+- I18n internationalization
+- JWT auth
+- Full features CRUDL
 
 ## Install
-
-Install
+```
+$ yarn install
+$ yarn run dev
+```
 
 ## Usage
-Usage
+Open [localhost:8080](http://localhost:8080)
 
-## Workflow
-Workflow
-
-## Tests
-Tests
-
-## Deployment
-Deployment
-
-## API Reference
-API Reference
+## Demo
+Github pages
 
 ## Built With
 - [VueJS](https://vuejs.org/)
+- [Webpack](https://webpack.js.org/)
 
 ## Versioning
 For transparency into the release cycle and in striving to maintain backward compatibility, the current project is maintained under Semantic Versioning guidelines and will adhere to these rules whenever possible.
@@ -43,7 +40,7 @@ For more information on SemVer, please visit http://semver.org/.
 - [X] VueJS SPA skeleton
 - [X] i18n
 - [X] Auth
-- [ ] CRUDL
+- [X] CRUDL
 
 ## Authors
 Authors
