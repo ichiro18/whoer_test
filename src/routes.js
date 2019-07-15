@@ -1,5 +1,4 @@
 import Vue from "vue";
-import process from "process";
 import Router from "vue-router";
 import store from "@project_src/store";
 // * Pages
@@ -30,7 +29,7 @@ const ifAuthenticated = (to, from, next) => {
 
 export default new Router({
   mode: "history",
-  base: process.env.BASE_URL,
+  base: "/whoer_test/",
   routes: [
     {
       path: "/",
