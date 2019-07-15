@@ -7,7 +7,7 @@
     <div class="header__nav">
       <lang-control class="header__lang" />
       <button class="header__logout" v-if="isAuth" @click="logOut">
-        Logout
+        <i class="fas fa-sign-out-alt"></i>
       </button>
     </div>
   </header>
@@ -63,6 +63,26 @@ export default {
       line-height: 2rem; // 32 sp
       font-weight: map_get($typography-font-weight-values, regular);
       letter-spacing: normal;
+    }
+  }
+  .header__nav {
+    display: flex;
+    .header__logout {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 32px;
+      width: 32px;
+      background-color: transparent;
+      outline: none;
+      border: none;
+      margin-left: 15px;
+      color: $dark-icon-color;
+      cursor: pointer;
+      &:hover,
+      &:active {
+        color: $primary-color;
+      }
     }
   }
 }
