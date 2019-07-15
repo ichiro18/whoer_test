@@ -4,7 +4,12 @@
       <img src="../common/images/logo.png" alt="Logo" class="logo__img" />
       <span class="logo__title">Test Task</span>
     </a>
-    <lang-control class="header__lang" />
+    <div class="header__nav">
+      <lang-control class="header__lang" />
+      <button class="header__logout" v-if="isAuth" @click="logOut">
+        Logout
+      </button>
+    </div>
   </header>
 </template>
 <script>
@@ -14,6 +19,23 @@ export default {
   name: "AppHeader",
   components: {
     langControl: LangControl
+  },
+  computed: {
+    isAuth() {
+      return this.$store.getters["auth/isAuthenticated"];
+    }
+  },
+  methods: {
+    logOut() {
+      this.$store
+        .dispatch("auth/logout")
+        .then(() => {
+          this.$router.push("/login");
+        })
+        .catch(error => {
+          throw new Error(error);
+        });
+    }
   }
 };
 </script>

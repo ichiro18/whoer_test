@@ -41,8 +41,8 @@ For more information on SemVer, please visit http://semver.org/.
 
 ## TODO
 - [X] VueJS SPA skeleton
-- [ ] i18n
-- [ ] Auth
+- [X] i18n
+- [X] Auth
 - [ ] CRUDL
 
 ## Authors
