@@ -29,6 +29,7 @@ const ifAuthenticated = (to, from, next) => {
 
 export default new Router({
   mode: "history",
+  base: "/whoer_test/",
   routes: [
     {
       path: "/",
