@@ -42,6 +42,13 @@
         <i class="far fa-edit action__edit"></i>
         Edit
       </router-link>
+      <router-link
+        :to="{ name: 'native', params: { id: $route.params.id } }"
+        class="button"
+      >
+        <i class="far fa-file-word action__native"></i>
+        Edit native
+      </router-link>
     </div>
   </div>
 </template>

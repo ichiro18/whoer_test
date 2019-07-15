@@ -7,36 +7,47 @@
           <li v-for="notice in notices" :key="notice">{{ notice }}</li>
         </ul>
       </div>
+      <table class="translation__data" v-if="translation">
+        <tbody>
+          <tr>
+            <td>ID</td>
+            <td>{{ translation.id }}</td>
+          </tr>
+          <tr>
+            <td>Name</td>
+            <td>{{ translation.name }}</td>
+          </tr>
+          <tr>
+            <td>lexicon</td>
+            <td>{{ translation.lexicon }}</td>
+          </tr>
+          <tr>
+            <td>created</td>
+            <td>{{ parseDate(translation.created) }}</td>
+          </tr>
+          <tr>
+            <td>updated</td>
+            <td>{{ parseDate(translation.updated) }}</td>
+          </tr>
+        </tbody>
+      </table>
       <form
         action="/translation"
         class="translation__form"
         method="post"
-        @submit="updateTranslation"
+        @submit="updateNative"
       >
         <div class="form__item">
-          <label for="translation-name" class="form__label">
-            Name
+          <label for="translation-native" class="form__label">
+            Native
           </label>
           <input
             type="text"
-            id="translation-name"
+            id="translation-native"
             class="form__input required"
             autofocus="autofocus"
             name="translation[name]"
-            v-model="fields.name"
-          />
-        </div>
-        <div class="form__item">
-          <label for="translation-lexicon" class="form__label">
-            Lexicon
-          </label>
-          <input
-            type="checkbox"
-            id="translation-lexicon"
-            class="form__input required"
-            autofocus="autofocus"
-            name="translation[lexicon]"
-            v-model="fields.lexicon"
+            v-model="fields.native"
           />
         </div>
         <div class="actions">
@@ -45,13 +56,6 @@
             Back
           </router-link>
           <input type="submit" name="commit" value="Update" class="button" />
-          <router-link
-            :to="{ name: 'native', params: { id: $route.params.id } }"
-            class="button"
-          >
-            <i class="far fa-file-word action__back"></i>
-            Update native
-          </router-link>
         </div>
       </form>
     </div>
@@ -64,9 +68,9 @@ export default {
   name: "UpdateTranslationPage",
   data() {
     return {
+      translation: null,
       fields: {
-        name: null,
-        lexicon: false
+        native: null
       },
       notices: []
     };
@@ -76,8 +80,8 @@ export default {
       .get("/v2/translation/" + this.$route.params.id)
       .then(response => {
         if (response.status === 200 && response.data) {
-          this.fields.name = response.data.name;
-          this.fields.lexicon = !!response.data.lexicon;
+          this.translation = response.data;
+          this.fields.native = this.translation.native;
         }
       })
       .catch(error => {
@@ -85,36 +89,33 @@ export default {
       });
   },
   methods: {
-    updateTranslation(e) {
+    parseDate(unixDate) {
+      const theDate = new Date(unixDate * 1000);
+      return theDate.toLocaleDateString() + " " + theDate.toLocaleTimeString();
+    },
+    updateNative(e) {
       e.preventDefault();
 
-      if (!this.fields.name) {
-        this.notices.push("Name field is required");
-      } else {
-        axios({
-          url: "/v2/translation/" + this.$route.params.id,
-          method: "PUT",
-          data: {
-            name: this.fields.name,
-            lexicon: this.fields.lexicon ? 1 : 0
-          }
+      axios({
+        url: "/v2/translation/" + this.$route.params.id + "/native",
+        method: "PUT",
+        data: {
+          native: this.fields.native
+        }
+      })
+        .then(response => {
+          this.notices.push("Success. Updated native for " + response.data.id);
+          setTimeout(() => {
+            this.$router.push({
+              name: "read",
+              params: { id: response.data.id }
+            });
+          }, 500);
         })
-          .then(response => {
-            this.notices.push(
-              "Success. Updated translation " + response.data.id
-            );
-            setTimeout(() => {
-              this.$router.push({
-                name: "read",
-                params: { id: response.data.id }
-              });
-            }, 500);
-          })
-          .catch(error => {
-            this.notices.push(error);
-            throw new Error(error);
-          });
-      }
+        .catch(error => {
+          this.notices.push(error);
+          throw new Error(error);
+        });
     }
   }
 };

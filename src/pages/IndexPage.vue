@@ -36,8 +36,8 @@
               @click="updateItem(item.id)"
             ></i>
             <i
-              class="far fa-trash-alt action__delete"
-              @click="deleteItem(item.id)"
+              class="far fa-file-word action__native"
+              @click="updateNative(item.id)"
             ></i>
           </td>
         </tr>
@@ -56,16 +56,8 @@ export default {
     };
   },
   mounted() {
-    axios
-      .get("/v2/translations")
-      .then(response => {
-        if (response.status === 200 && response.data) {
-          this.translations = response.data;
-        }
-      })
-      .catch(error => {
-        throw new Error(error);
-      });
+    this.getTranslations();
+    setInterval(this.getTranslations(), 60000);
   },
   methods: {
     parseDate(unixDate) {
@@ -81,8 +73,21 @@ export default {
     updateItem(id) {
       this.$router.push({ name: "update", params: { id } });
     },
-    deleteItem(id) {
-      this.$router.push({ name: "delete", params: { id } });
+    updateNative(id) {
+      this.$router.push({ name: "native", params: { id } });
+    },
+    getTranslations() {
+      console.log("update list");
+      axios
+        .get("/v2/translations")
+        .then(response => {
+          if (response.status === 200 && response.data) {
+            this.translations = response.data;
+          }
+        })
+        .catch(error => {
+          throw new Error(error);
+        });
     }
   }
 };
@@ -94,8 +99,10 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   .translations__actions {
     display: flex;
+
     .button {
       display: block;
       height: 38px;
@@ -107,18 +114,22 @@ export default {
       border-radius: 3px;
       cursor: pointer;
       margin-right: 15px;
+
       i {
         margin-right: 10px;
       }
+
       &:hover {
         background-color: darken($primary-color, 10%);
       }
+
       &:active {
         transform: translateY(1px);
       }
     }
   }
 }
+
 table {
   width: 100%;
   color: $dark-primary-text-color;
@@ -175,14 +186,17 @@ table {
     }
   }
 }
+
 .translation__action {
   i {
     cursor: pointer;
     font-size: 16px;
     color: $dark-icon-color;
+
     i + i {
       margin-left: 10px;
     }
+
     &:hover {
       color: $primary-color;
     }

@@ -28,17 +28,17 @@ export default {
     }
   },
   mounted() {
+    console.log(this.$i18n.locale);
     axios
       .get("/v2/languages")
       .then(response => {
         if (response.status === 200 && response.data) {
           this.languages = response.data;
           const currentLang = this.languages.find(
-            item => item.code === document.documentElement.getAttribute("lang")
+            item => item.code === this.$i18n.locale
           );
           if (currentLang) {
             this.locale = currentLang.code;
-            this.handleSelectLang();
           }
         }
       })

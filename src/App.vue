@@ -18,6 +18,8 @@ export default {
         return response;
       },
       error => {
+        console.log("refresh token");
+        console.log(error);
         console.log(error.response);
         return new Promise((resolve, reject) => {
           if (error.response && error.response.status === 401) {
