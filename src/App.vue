@@ -13,22 +13,32 @@ export default {
     }
   },
   created() {
-    axios.interceptors.response.use(undefined, error => {
-      return new Promise(() => {
-        if (error.status === 401) {
-          this.$store
-            .dispatch("auth/refreshToken")
-            .then(response => {
-              console.log("token refreshed", response);
-            })
-            .catch(error => {
-              console.error("token not refreshed. Logout", error);
-              this.$router.push("/login");
-            });
-        }
-        throw error;
-      });
-    });
+    axios.interceptors.response.use(
+      response => {
+        return response;
+      },
+      error => {
+        console.log("refresh token");
+        console.log(error);
+        console.log(error.response);
+        return new Promise((resolve, reject) => {
+          if (error.response && error.response.status === 401) {
+            this.$store
+              .dispatch("auth/refreshToken")
+              .then(response => {
+                console.log("token refreshed", response);
+                resolve();
+              })
+              .catch(error => {
+                console.error("token not refreshed. Logout", error);
+                this.$router.push("/login");
+                reject(error);
+              });
+          }
+          reject(error);
+        });
+      }
+    );
   }
 };
 </script>

@@ -25,6 +25,8 @@ export default {
     handleSelectLang() {
       axios.defaults.headers.common["Accept-Language"] = this.locale;
       this.$i18n.locale = this.locale;
+      localStorage.setItem("locale", this.locale);
+      this.$store.dispatch("changeLocale", { locale: this.locale });
     }
   },
   mounted() {
@@ -34,17 +36,19 @@ export default {
         if (response.status === 200 && response.data) {
           this.languages = response.data;
           const currentLang = this.languages.find(
-            item => item.code === document.documentElement.getAttribute("lang")
+            item => item.code === this.$i18n.locale
           );
           if (currentLang) {
             this.locale = currentLang.code;
-            this.handleSelectLang();
           }
         }
       })
       .catch(error => {
         throw new Error(error);
       });
+  },
+  beforeDestroy() {
+    localStorage.removeItem("locale");
   }
 };
 </script>

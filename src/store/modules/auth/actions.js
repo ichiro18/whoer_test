@@ -7,6 +7,8 @@ export default {
       commit("removeToken");
       // clear local storage
       localStorage.removeItem("user-token");
+      localStorage.removeItem("user-session");
+      localStorage.removeItem("user-session-secret");
       // clear header
       delete axios.defaults.headers.common["Authorization"];
       resolve();
@@ -30,6 +32,8 @@ export default {
 
           // save to localStorage
           localStorage.setItem("user-token", token);
+          localStorage.setItem("user-session", session.id);
+          localStorage.setItem("user-session-secret", session.secret);
           // add to store
           commit("setToken", { token, expires, session });
           // add header
@@ -42,6 +46,8 @@ export default {
           commit("removeToken");
           // clear local storage
           localStorage.removeItem("user-token");
+          localStorage.removeItem("user-session");
+          localStorage.removeItem("user-session-secret");
           // clear header
           delete axios.defaults.headers.common["Authorization"];
           reject(error);
@@ -50,37 +56,47 @@ export default {
   },
   refreshToken({ state, commit }) {
     return new Promise((resolve, reject) => {
-      axios({
-        url: "/v2/my-session/" + state.session.id + "/refresh",
-        method: "put",
-        data: {
-          secret: state.session.secret
-        }
-      })
-        .then(response => {
-          // parse data
-          const token = response.headers["x-access-token"];
-          const expires = response.headers["x-access-expires"];
-          const session = response.data;
-
-          // save to localStorage
-          localStorage.setItem("user-token", token);
-          // add to store
-          commit("setToken", { token, expires, session });
-          // add header
-          axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-
-          resolve(response);
+      const id = state.session.id || localStorage.getItem("user-session");
+      const secret =
+        state.session.secret || localStorage.getItem("user-session-secret");
+      if (id && secret) {
+        axios({
+          url: "/v2/my-session/" + id + "/refresh",
+          method: "put",
+          data: {
+            secret: secret
+          }
         })
-        .catch(error => {
-          // remove from store
-          commit("removeToken");
-          // clear local storage
-          localStorage.removeItem("user-token");
-          // clear header
-          delete axios.defaults.headers.common["Authorization"];
-          reject(error);
-        });
+          .then(response => {
+            // parse data
+            const token = response.headers["x-access-token"];
+            const expires = response.headers["x-access-expires"];
+            const session = response.data;
+
+            // save to localStorage
+            localStorage.setItem("user-token", token);
+            // add to store
+            commit("setToken", { token, expires, session });
+            // add header
+            axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+
+            resolve(response);
+          })
+          .catch(error => {
+            // remove from store
+            commit("removeToken");
+            // clear local storage
+            // clear local storage
+            localStorage.removeItem("user-token");
+            localStorage.removeItem("user-session");
+            localStorage.removeItem("user-session-secret");
+            // clear header
+            delete axios.defaults.headers.common["Authorization"];
+            reject(error);
+          });
+      } else {
+        reject();
+      }
     });
   }
 };
