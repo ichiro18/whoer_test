@@ -15,6 +15,10 @@ Vue.component("main-layout", MainLayout);
 
 // register api
 axios.defaults.baseURL = "https://test.whteam.net";
+const token = localStorage.getItem("user-token");
+if (token) {
+  axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+}
 
 // Navigate hooks
 router.beforeEach((to, from, next) => {

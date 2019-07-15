@@ -27,6 +27,7 @@
             class="form__input required"
             autofocus="autofocus"
             name="user[login]"
+            v-model="fields.username"
           />
         </div>
         <div class="form__item">
@@ -39,6 +40,7 @@
             class="form__input required"
             autofocus="autofocus"
             name="user[password]"
+            v-model="fields.password"
           />
         </div>
         <input
@@ -191,11 +193,22 @@ export default {
   methods: {
     checkForm(e) {
       e.preventDefault();
-      if (this.fields.username && this.fields.password) {
-        return true;
-      }
 
       this.errors = [];
+
+      if (this.fields.username && this.fields.password) {
+        this.$store
+          .dispatch("auth/login", {
+            username: this.fields.username,
+            password: this.fields.password
+          })
+          .then(() => {
+            this.$router.push("/");
+          })
+          .catch(error => {
+            console.warn(error);
+          });
+      }
 
       // TODO: i18n error messages
       if (!this.fields.username) {
