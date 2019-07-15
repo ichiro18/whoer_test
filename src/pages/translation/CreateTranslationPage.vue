@@ -80,7 +80,6 @@ export default {
           }
         })
           .then(response => {
-            console.log(response);
             if (response.status === 201 && response.data) {
               this.notices.push(
                 "Success. Created translation " + response.data.id
