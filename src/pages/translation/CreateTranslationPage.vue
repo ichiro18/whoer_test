@@ -1,6 +1,6 @@
 <template>
   <div class="translation-create">
-    <h1>Create translation</h1>
+    <h1>{{ $t("form.head") }}</h1>
     <div class="translation__box">
       <div id="flash" v-if="notices.length">
         <ul>
@@ -15,7 +15,7 @@
       >
         <div class="form__item">
           <label for="translation-name" class="form__label">
-            Name
+            {{ $t("form.name") }}
           </label>
           <input
             type="text"
@@ -28,7 +28,7 @@
         </div>
         <div class="form__item">
           <label for="translation-lexicon" class="form__label">
-            Lexicon
+            {{ $t("form.lexicon") }}
           </label>
           <input
             type="checkbox"
@@ -42,7 +42,7 @@
         <input
           type="submit"
           name="commit"
-          value="Create"
+          :value="$t('form.action')"
           class="form__submit"
         />
       </form>
@@ -54,6 +54,98 @@ import axios from "axios";
 
 export default {
   name: "CreateTranslationPage",
+  i18n: {
+    messages: {
+      en: {
+        form: {
+          head: "Create translation",
+          action: "Create",
+          name: "Name",
+          lexicon: "Lexicon"
+        }
+      },
+      es: {
+        form: {
+          head: "Crear traducción",
+          action: "Crear",
+          name: "Nombre",
+          lexicon: "Léxico"
+        }
+      },
+      de: {
+        form: {
+          head: "Übersetzung erstellen",
+          action: "Erstellen",
+          name: "Name",
+          lexicon: "Lexikon"
+        }
+      },
+      fr: {
+        form: {
+          head: "Créer une traduction",
+          action: "Créer",
+          name: "Prénom",
+          lexicon: "Lexique"
+        }
+      },
+      "pt-br": {
+        form: {
+          head: "Criar tradução",
+          action: "Crio",
+          name: "Nome",
+          lexicon: "Léxico"
+        }
+      },
+      it: {
+        form: {
+          head: "Crea traduzione",
+          action: "Creare",
+          name: "Nome",
+          lexicon: "Lessico"
+        }
+      },
+      ru: {
+        form: {
+          head: "Создать перевод",
+          action: "Создать",
+          name: "Название",
+          lexicon: "Лексикон"
+        }
+      },
+      uk: {
+        form: {
+          head: "Створити переклад",
+          action: "Створити",
+          name: "Ім'я",
+          lexicon: "Лексикон"
+        }
+      },
+      tr: {
+        form: {
+          head: "Çeviri oluştur",
+          action: "Yaratmak",
+          name: "Isim",
+          lexicon: "Sözlük"
+        }
+      },
+      "zh-tw": {
+        form: {
+          head: "創建翻譯",
+          action: "創建",
+          name: "名稱",
+          lexicon: "詞彙"
+        }
+      },
+      "zh-cn": {
+        form: {
+          head: "创建翻译",
+          action: "创建",
+          name: "名称",
+          lexicon: "词汇"
+        }
+      }
+    }
+  },
   data() {
     return {
       fields: {

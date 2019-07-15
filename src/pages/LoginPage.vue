@@ -206,7 +206,7 @@ export default {
             this.$router.push("/");
           })
           .catch(error => {
-            this.errors.push(error.response.statusText);
+            this.errors.push(error.response.headers["x-message"]);
             console.warn(error);
           });
       }

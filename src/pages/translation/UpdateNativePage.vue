@@ -1,32 +1,32 @@
 <template>
   <div class="translation-update">
-    <h1>Update translation {{ $route.params.id }}</h1>
-    <div class="translation__box">
-      <div id="flash" v-if="notices.length">
+    <h1>{{ $t("form.head") }} {{ $route.params.id }}</h1>
+    <div class="translation__box" v-if="translation">
+      <div class="flash" v-if="notices.length">
         <ul>
           <li v-for="notice in notices" :key="notice">{{ notice }}</li>
         </ul>
       </div>
-      <table class="translation__data" v-if="translation">
+      <table class="translation__data">
         <tbody>
           <tr>
             <td>ID</td>
             <td>{{ translation.id }}</td>
           </tr>
           <tr>
-            <td>Name</td>
+            <td>{{ $t("form.name") }}</td>
             <td>{{ translation.name }}</td>
           </tr>
           <tr>
-            <td>lexicon</td>
+            <td>{{ $t("form.lexicon") }}</td>
             <td>{{ translation.lexicon }}</td>
           </tr>
           <tr>
-            <td>created</td>
+            <td>{{ $t("form.created") }}</td>
             <td>{{ parseDate(translation.created) }}</td>
           </tr>
           <tr>
-            <td>updated</td>
+            <td>{{ $t("form.updated") }}</td>
             <td>{{ parseDate(translation.updated) }}</td>
           </tr>
         </tbody>
@@ -36,10 +36,11 @@
         class="translation__form"
         method="post"
         @submit="updateNative"
+        v-if="translation"
       >
         <div class="form__item">
           <label for="translation-native" class="form__label">
-            Native
+            {{ $t("form.native") }}
           </label>
           <input
             type="text"
@@ -53,12 +54,18 @@
         <div class="actions">
           <router-link to="/" class="button">
             <i class="fas fa-backward action__back"></i>
-            Back
+            {{ $t("form.back") }}
           </router-link>
-          <input type="submit" name="commit" value="Update" class="button" />
+          <input
+            type="submit"
+            name="commit"
+            :value="$t('form.action')"
+            class="button"
+          />
         </div>
       </form>
     </div>
+    <div id="flash" v-else>{{ $t("form.notAvailable") }}</div>
   </div>
 </template>
 <script>
@@ -66,6 +73,164 @@ import axios from "axios";
 
 export default {
   name: "UpdateTranslationPage",
+  i18n: {
+    messages: {
+      en: {
+        form: {
+          head: "Translation",
+          action: "Edit",
+          name: "Name",
+          native: "Native",
+          lexicon: "Lexicon",
+          created: "Created",
+          updated: "Updated",
+          notAvailable: "Not Available",
+          back: "Back",
+          actionMore: "Edit native"
+        }
+      },
+      es: {
+        form: {
+          head: "Traducción",
+          action: "Editar",
+          name: "Nombre",
+          native: "Nativo",
+          lexicon: "Léxico",
+          created: "Creado",
+          updated: "Actualizado",
+          notAvailable: "No disponible",
+          back: "Espalda",
+          actionMore: "Editar nativo"
+        }
+      },
+      de: {
+        form: {
+          head: "Übersetzung",
+          action: "Bearbeiten",
+          name: "Name",
+          native: "Eingeborener",
+          lexicon: "Lexikon",
+          created: "Erstellt",
+          updated: "Aktualisierte",
+          notAvailable: "Nicht verfügbar",
+          back: "Zurück",
+          actionMore: "Native bearbeiten"
+        }
+      },
+      fr: {
+        form: {
+          head: "Traduction",
+          action: "modifier",
+          name: "prénom",
+          native: "Originaire de",
+          lexicon: "Lexique",
+          created: "Créé",
+          updated: "Mis à jour",
+          notAvailable: "Indisponible",
+          back: "Retour",
+          actionMore: "Modifier natif"
+        }
+      },
+      "pt-br": {
+        form: {
+          head: "Tradução",
+          action: "Editar",
+          name: "Nome",
+          native: "Nativo",
+          lexicon: "Léxico",
+          created: "Criado",
+          updated: "Atualizada",
+          notAvailable: "Não disponível",
+          back: "De volta",
+          actionMore: "Editar nativo"
+        }
+      },
+      it: {
+        form: {
+          head: "Traduzione",
+          action: "modificare",
+          name: "Nome",
+          native: "nativo",
+          lexicon: "Lessico",
+          created: "Creato",
+          updated: "aggiornato",
+          notAvailable: "Non disponibile",
+          back: "Indietro",
+          actionMore: "Modifica nativo"
+        }
+      },
+      ru: {
+        form: {
+          head: "Перевод",
+          action: "Редактировать",
+          name: "Названия",
+          native: "Нативно",
+          lexicon: "Лексикон",
+          created: "Создан",
+          updated: "Обновлен",
+          notAvailable: "Не доступно",
+          back: "Назад",
+          actionMore: "Редактировать нативный"
+        }
+      },
+      uk: {
+        form: {
+          head: "Переклад",
+          action: "Редагувати",
+          name: "Ім'я",
+          native: "Рідний",
+          lexicon: "Лексикон",
+          created: "Створено",
+          updated: "Оновлено",
+          notAvailable: "Недоступний",
+          back: "Назад",
+          actionMore: "Редагувати рідний"
+        }
+      },
+      tr: {
+        form: {
+          head: "Çeviri",
+          action: "Düzenle",
+          name: "isim",
+          native: "yerli",
+          lexicon: "sözlük",
+          created: "düzenlendi",
+          updated: "Güncellenmiş",
+          notAvailable: "Müsait değil",
+          back: "Geri",
+          actionMore: "Yerlileri düzenle"
+        }
+      },
+      "zh-tw": {
+        form: {
+          head: "翻譯",
+          action: "編輯",
+          name: "名稱",
+          native: "本地人",
+          lexicon: "詞彙",
+          created: "創建",
+          updated: "更新",
+          notAvailable: "無法使用",
+          back: "背部",
+          actionMore: "編輯原生"
+        }
+      },
+      "zh-cn": {
+        form: {
+          head: "翻译",
+          action: "编辑",
+          name: "名称",
+          native: "本地人",
+          lexicon: "词汇",
+          created: "创建",
+          updated: "更新",
+          notAvailable: "无法使用",
+          back: "背部",
+          actionMore: "编辑原生"
+        }
+      }
+    }
+  },
   data() {
     return {
       translation: null,
@@ -130,7 +295,7 @@ export default {
     position: relative;
     width: 50%;
     padding: 15px 0;
-    #flash {
+    .flash {
       display: block;
       width: 100%;
       margin-bottom: 30px;

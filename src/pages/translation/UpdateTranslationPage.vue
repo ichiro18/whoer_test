@@ -1,6 +1,6 @@
 <template>
   <div class="translation-update">
-    <h1>Update translation {{ $route.params.id }}</h1>
+    <h1>{{ $t("form.head") }} {{ $route.params.id }}</h1>
     <div class="translation__box">
       <div id="flash" v-if="notices.length">
         <ul>
@@ -15,7 +15,7 @@
       >
         <div class="form__item">
           <label for="translation-name" class="form__label">
-            Name
+            {{ $t("form.name") }}
           </label>
           <input
             type="text"
@@ -28,7 +28,7 @@
         </div>
         <div class="form__item">
           <label for="translation-lexicon" class="form__label">
-            Lexicon
+            {{ $t("form.lexicon") }}
           </label>
           <input
             type="checkbox"
@@ -42,15 +42,20 @@
         <div class="actions">
           <router-link to="/" class="button">
             <i class="fas fa-backward action__back"></i>
-            Back
+            {{ $t("form.back") }}
           </router-link>
-          <input type="submit" name="commit" value="Update" class="button" />
+          <input
+            type="submit"
+            name="commit"
+            :value="$t('form.action')"
+            class="button"
+          />
           <router-link
             :to="{ name: 'native', params: { id: $route.params.id } }"
             class="button"
           >
-            <i class="far fa-file-word action__back"></i>
-            Update native
+            <i class="far fa-file-word action__more"></i>
+            {{ $t("form.actionMore") }}
           </router-link>
         </div>
       </form>
@@ -62,6 +67,131 @@ import axios from "axios";
 
 export default {
   name: "UpdateTranslationPage",
+  i18n: {
+    messages: {
+      en: {
+        form: {
+          head: "Translation",
+          action: "Edit",
+          name: "Name",
+          lexicon: "Lexicon",
+          notAvailable: "Not Available",
+          back: "Back",
+          actionMore: "Edit native"
+        }
+      },
+      es: {
+        form: {
+          head: "Traducción",
+          action: "Editar",
+          name: "Nombre",
+          lexicon: "Léxico",
+          notAvailable: "No disponible",
+          back: "Espalda",
+          actionMore: "Editar nativo"
+        }
+      },
+      de: {
+        form: {
+          head: "Übersetzung",
+          action: "Bearbeiten",
+          name: "Name",
+          lexicon: "Lexikon",
+          notAvailable: "Nicht verfügbar",
+          back: "Zurück",
+          actionMore: "Native bearbeiten"
+        }
+      },
+      fr: {
+        form: {
+          head: "Traduction",
+          action: "modifier",
+          name: "Prénom",
+          lexicon: "Lexique",
+          notAvailable: "Indisponible",
+          back: "Retour",
+          actionMore: "Modifier natif"
+        }
+      },
+      "pt-br": {
+        form: {
+          head: "Tradução",
+          action: "Editar",
+          name: "Nome",
+          lexicon: "Léxico",
+          notAvailable: "Não disponível",
+          back: "De volta",
+          actionMore: "Editar nativo"
+        }
+      },
+      it: {
+        form: {
+          head: "Traduzione",
+          action: "modificare",
+          name: "Nome",
+          lexicon: "Lessico",
+          notAvailable: "Non disponibile",
+          back: "Indietro",
+          actionMore: "Modifica nativo"
+        }
+      },
+      ru: {
+        form: {
+          head: "Перевод",
+          action: "Редактировать",
+          name: "Название",
+          lexicon: "Лексикон",
+          notAvailable: "Не доступно",
+          back: "Назад",
+          actionMore: "Редактировать нативный"
+        }
+      },
+      uk: {
+        form: {
+          head: "Переклад",
+          action: "Редагувати",
+          name: "Ім'я",
+          lexicon: "Лексикон",
+          notAvailable: "Недоступний",
+          back: "Назад",
+          actionMore: "Редагувати рідний"
+        }
+      },
+      tr: {
+        form: {
+          head: "Çeviri",
+          action: "Düzenle",
+          name: "Isim",
+          lexicon: "Sözlük",
+          notAvailable: "Müsait değil",
+          back: "Geri",
+          actionMore: "Yerlileri düzenle"
+        }
+      },
+      "zh-tw": {
+        form: {
+          head: "翻譯",
+          action: "編輯",
+          name: "名稱",
+          lexicon: "詞彙",
+          notAvailable: "無法使用",
+          back: "背部",
+          actionMore: "編輯原生"
+        }
+      },
+      "zh-cn": {
+        form: {
+          head: "创建翻译",
+          action: "创建",
+          name: "名称",
+          lexicon: "词汇",
+          notAvailable: "无法使用",
+          back: "背部",
+          actionMore: "编辑原生"
+        }
+      }
+    }
+  },
   data() {
     return {
       fields: {
