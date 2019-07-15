@@ -1,9 +1,9 @@
 <template>
   <header class="header">
-    <a href="/" class="header__logo">
+    <router-link :to="{ name: index }" class="header__logo">
       <img src="../common/images/logo.png" alt="Logo" class="logo__img" />
       <span class="logo__title">Test Task</span>
-    </a>
+    </router-link>
     <div class="header__nav">
       <lang-control class="header__lang" />
       <button class="header__logout" v-if="isAuth" @click="logOut">

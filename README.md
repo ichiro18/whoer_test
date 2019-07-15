@@ -25,7 +25,7 @@ $ yarn run dev
 Open [localhost:8080](http://localhost:8080)
 
 ## Demo
-Github pages
+View demo [here](https://ichiro18.github.io/whoer_test/)
 
 ## Built With
 - [VueJS](https://vuejs.org/)
