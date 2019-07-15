@@ -1,24 +1,24 @@
 <template>
   <div class="translations">
     <div class="translations__header">
-      <h3 class="translations__title">Translations</h3>
+      <h3 class="translations__title">{{ $t("table.head") }}</h3>
       <div class="translations__actions">
         <button class="button action__create" @click="createItem()">
           <i class="fas fa-plus"></i>
-          Create
+          {{ $t("table.actionCreate") }}
         </button>
       </div>
     </div>
     <table class="translations__list" v-if="translations.length">
       <thead>
         <tr>
-          <th>id</th>
-          <th>name</th>
-          <th>native</th>
-          <th>lexicon</th>
-          <th>created</th>
-          <th>updated</th>
-          <th>actions</th>
+          <th>ID</th>
+          <th>{{ $t("table.name") }}</th>
+          <th>{{ $t("table.native") }}</th>
+          <th>{{ $t("table.lexicon") }}</th>
+          <th>{{ $t("table.created") }}</th>
+          <th>{{ $t("table.updated") }}</th>
+          <th>{{ $t("table.actions") }}</th>
         </tr>
       </thead>
       <tbody>
@@ -50,14 +50,151 @@ import axios from "axios";
 
 export default {
   name: "IndexPage",
+  i18n: {
+    messages: {
+      en: {
+        table: {
+          head: "Translations",
+          actionCreate: "Create",
+          name: "Name",
+          native: "Native",
+          lexicon: "Lexicon",
+          created: "Created",
+          updated: "Updated",
+          actions: "Actions"
+        }
+      },
+      es: {
+        table: {
+          head: "Traducciones",
+          actionCreate: "Crear",
+          name: "Nombre",
+          native: "Nativo",
+          lexicon: "Léxico",
+          created: "Creado",
+          updated: "Actualizado",
+          actions: "Comportamiento"
+        }
+      },
+      de: {
+        table: {
+          head: "Übersetzungen",
+          actionCreate: "Erstellen",
+          name: "Name",
+          native: "Eingeborener",
+          lexicon: "Lexikon",
+          created: "Erstellt",
+          updated: "Aktualisierte",
+          actions: "Aktionen"
+        }
+      },
+      fr: {
+        table: {
+          head: "Traductions",
+          actionCreate: "Créer",
+          name: "prénom",
+          native: "Originaire de",
+          lexicon: "Lexique",
+          created: "Créé",
+          updated: "Mis à jour",
+          actions: "actes"
+        }
+      },
+      "pt-br": {
+        table: {
+          head: "Traduções",
+          actionCreate: "Crio",
+          name: "Nome",
+          native: "Nativo",
+          lexicon: "Léxico",
+          created: "Criado",
+          updated: "Atualizada",
+          actions: "Ações"
+        }
+      },
+      it: {
+        table: {
+          head: "Traduzioni",
+          actionCreate: "Creare",
+          name: "Nome",
+          native: "nativo",
+          lexicon: "Lessico",
+          created: "Creato",
+          updated: "aggiornato",
+          actions: "Azioni"
+        }
+      },
+      ru: {
+        table: {
+          head: "Переводы",
+          actionCreate: "Создать",
+          name: "Название",
+          native: "Нативный",
+          lexicon: "Лексикон",
+          created: "Создан",
+          updated: "Обновлен",
+          actions: "Действия"
+        }
+      },
+      uk: {
+        table: {
+          head: "Переклади",
+          actionCreate: "Створити",
+          name: "Ім'я",
+          native: "Рідний",
+          lexicon: "Лексикон",
+          created: "Створено",
+          updated: "Оновлено",
+          actions: "Дії"
+        }
+      },
+      tr: {
+        table: {
+          head: "Çeviriler",
+          actionCreate: "yaratmak",
+          name: "isim",
+          native: "yerli",
+          lexicon: "sözlük",
+          created: "düzenlendi",
+          updated: "Güncellenmiş",
+          actions: "Eylemler"
+        }
+      },
+      "zh-tw": {
+        table: {
+          head: "翻譯",
+          actionCreate: "創建",
+          name: "名稱",
+          native: "本地人",
+          lexicon: "詞彙",
+          created: "創建",
+          updated: "更新",
+          actions: "操作"
+        }
+      },
+      "zh-cn": {
+        table: {
+          head: "翻译",
+          actionCreate: "创建",
+          name: "名称",
+          native: "本地人",
+          lexicon: "词汇",
+          created: "创建",
+          updated: "更新",
+          actions: "操作"
+        }
+      }
+    }
+  },
   data() {
     return {
-      translations: []
+      translations: [],
+      timer: null
     };
   },
   mounted() {
     this.getTranslations();
-    setInterval(this.getTranslations(), 60000);
+    this.timer = setInterval(() => this.getTranslations(), 60000);
   },
   methods: {
     parseDate(unixDate) {
@@ -81,6 +218,9 @@ export default {
       axios
         .get("/v2/translations")
         .then(response => {
+          if (response.status === 204) {
+            return;
+          }
           if (response.status === 200 && response.data) {
             this.translations = response.data;
           }
@@ -89,6 +229,9 @@ export default {
           throw new Error(error);
         });
     }
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
   }
 };
 </script>
