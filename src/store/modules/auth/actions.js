@@ -47,5 +47,40 @@ export default {
           reject(error);
         });
     });
+  },
+  refreshToken({ state, commit }) {
+    return new Promise((resolve, reject) => {
+      axios({
+        url: "/v2/my-session/" + state.session.id + "/refresh",
+        method: "put",
+        data: {
+          secret: state.session.secret
+        }
+      })
+        .then(response => {
+          // parse data
+          const token = response.headers["x-access-token"];
+          const expires = response.headers["x-access-expires"];
+          const session = response.data;
+
+          // save to localStorage
+          localStorage.setItem("user-token", token);
+          // add to store
+          commit("setToken", { token, expires, session });
+          // add header
+          axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+
+          resolve(response);
+        })
+        .catch(error => {
+          // remove from store
+          commit("removeToken");
+          // clear local storage
+          localStorage.removeItem("user-token");
+          // clear header
+          delete axios.defaults.headers.common["Authorization"];
+          reject(error);
+        });
+    });
   }
 };
