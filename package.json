@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "./node_modules/.bin/webpack-dev-server --config config/webpack/webpack.dev.config.js",
     "build:dev": "./node_modules/.bin/webpack --config config/webpack/webpack.dev.config.js",
+    "build:prod": "./node_modules/.bin/webpack --config config/webpack/webpack.prod.config.js",
+    "build:doc": "./node_modules/.bin/webpack --config config/webpack/webpack.doc.config.js",
     "lint:js": "eslint src/**/*.(vue|js)"
   },
   "devDependencies": {
