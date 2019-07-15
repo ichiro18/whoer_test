@@ -7,7 +7,6 @@ import LoginPage from "@project_src/pages/LoginPage.vue";
 import Create from "@project_src/pages/translation/CreateTranslationPage.vue";
 import Read from "@project_src/pages/translation/ReadTranslationPage.vue";
 import Update from "@project_src/pages/translation/UpdateTranslationPage.vue";
-import Delete from "@project_src/pages/translation/DeleteTranslationPage.vue";
 
 Vue.use(Router);
 
@@ -64,14 +63,6 @@ export default new Router({
       name: "update",
       meta: { layout: "main", requiresAuth: true },
       component: Update,
-      beforeEnter: ifAuthenticated,
-      props: true
-    },
-    {
-      path: "/translation/:id/delete",
-      name: "delete",
-      meta: { layout: "main", requiresAuth: true },
-      component: Delete,
       beforeEnter: ifAuthenticated,
       props: true
     }

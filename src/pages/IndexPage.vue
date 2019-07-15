@@ -3,7 +3,7 @@
     <div class="translations__header">
       <h3 class="translations__title">Translations</h3>
       <div class="translations__actions">
-        <button class="action__create" @click="createItem()">
+        <button class="button action__create" @click="createItem()">
           <i class="fas fa-plus"></i>
           Create
         </button>
@@ -96,7 +96,7 @@ export default {
   align-items: center;
   .translations__actions {
     display: flex;
-    .action__create {
+    .button {
       display: block;
       height: 38px;
       padding: 12px 18px;
@@ -106,6 +106,7 @@ export default {
       border: none;
       border-radius: 3px;
       cursor: pointer;
+      margin-right: 15px;
       i {
         margin-right: 10px;
       }
