@@ -1,0 +1,49 @@
+// Config
+@import "config/variables";
+@import "config/vendor";
+@import "config/fonts";
+@import "config/functions";
+
+/*------------------------------------*\
+    MAIN
+\*------------------------------------*/
+
+/* global box-sizing */
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Typography */
+html {
+  font-size: 16px;
+}
+body {
+  color: $dark-primary-text-color;
+  font-family: $typography-font-family;
+  font-weight: map_get($typography-font-weight-values, regular);
+  font-size: 1rem;
+}
+
+/* Clear */
+.clear {
+  *zoom: 1;
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+/* Input */
+input:focus,
+textarea:focus {
+  outline: none;
+  border: 1px solid $primary-color;
+}
