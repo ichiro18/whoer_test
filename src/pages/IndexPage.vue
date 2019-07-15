@@ -188,9 +188,15 @@ export default {
   },
   data() {
     return {
+      currentLocale: "en",
       translations: [],
       timer: null
     };
+  },
+  computed: {
+    locale() {
+      return this.$store.getters["getLocale"];
+    }
   },
   mounted() {
     this.getTranslations();
@@ -223,11 +229,19 @@ export default {
           }
           if (response.status === 200 && response.data) {
             this.translations = response.data;
+            this.currentLocale = response.headers["content-language"];
           }
         })
         .catch(error => {
           throw new Error(error);
         });
+    }
+  },
+  watch: {
+    locale(newVal) {
+      if (newVal !== this.currentLocale) {
+        this.getTranslations();
+      }
     }
   },
   beforeDestroy() {

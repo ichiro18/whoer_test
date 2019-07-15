@@ -25,10 +25,11 @@ export default {
     handleSelectLang() {
       axios.defaults.headers.common["Accept-Language"] = this.locale;
       this.$i18n.locale = this.locale;
+      localStorage.setItem("locale", this.locale);
+      this.$store.dispatch("changeLocale", { locale: this.locale });
     }
   },
   mounted() {
-    console.log(this.$i18n.locale);
     axios
       .get("/v2/languages")
       .then(response => {
@@ -45,6 +46,9 @@ export default {
       .catch(error => {
         throw new Error(error);
       });
+  },
+  beforeDestroy() {
+    localStorage.removeItem("locale");
   }
 };
 </script>
